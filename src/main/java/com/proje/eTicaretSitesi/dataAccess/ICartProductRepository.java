@@ -5,9 +5,8 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.proje.eTicaretSitesi.entities.Cart;
-import com.proje.eTicaretSitesi.entities.User;
+import com.proje.eTicaretSitesi.entities.CartItem;
 
-public interface IBasketRepository extends JpaRepository<Cart, Long>{
-	List<Cart> findByUser(User user);
-
+public interface ICartProductRepository extends JpaRepository<CartItem, Long> {
+	List<CartItem> findByBasket(Cart cart);
 }

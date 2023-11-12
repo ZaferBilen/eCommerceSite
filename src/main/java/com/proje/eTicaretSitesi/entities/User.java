@@ -39,5 +39,5 @@ public class User {
 	private String password;
 	
 	@OneToMany(mappedBy = "user")
-	private List<Basket> baskets;
+	private List<Cart> carts;
 }

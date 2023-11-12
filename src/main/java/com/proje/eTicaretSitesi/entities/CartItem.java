@@ -19,7 +19,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BasketItem {
+public class CartItem {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,8 +30,8 @@ public class BasketItem {
 	private Product product;
 	
 	@ManyToOne
-    @JoinColumn(name = "basket_id")
-	private Basket basket;
+    @JoinColumn(name = "cart_id")
+	private Cart cart;
 	
 	@Column(name = "quantity")
 	private int quantity; // adet

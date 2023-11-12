@@ -22,7 +22,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Basket { //Sepet
+public class Cart { //Sepet
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY )
@@ -32,7 +32,7 @@ public class Basket { //Sepet
 	@JoinColumn(name = "user_id")
 	private User user;
 	
-	@OneToMany(mappedBy = "basket")
-	private List<BasketItem> basketItems;
+	@OneToMany(mappedBy = "cart")
+	private List<CartItem> cartItems;
 
 }
