@@ -1,5 +1,5 @@
 package com.proje.eTicaretSitesi.business.abstracts;
 
-public interface IBasketItemService {
+public interface ICartItemService {
 
 }

@@ -8,5 +8,5 @@ import com.proje.eTicaretSitesi.entities.Cart;
 import com.proje.eTicaretSitesi.entities.CartItem;
 
 public interface ICartProductRepository extends JpaRepository<CartItem, Long> {
-	List<CartItem> findByBasket(Cart cart);
+	//List<CartItem> findByBasket(Cart cart);
 }
