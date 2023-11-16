@@ -5,6 +5,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
 
+import com.proje.eTicaretSitesi.business.abstracts.ICartService;
 import com.proje.eTicaretSitesi.business.abstracts.IUserService;
 import com.proje.eTicaretSitesi.business.requests.UserLoginRequest;
 import com.proje.eTicaretSitesi.business.requests.UserRegisterRequest;
@@ -23,12 +24,15 @@ public class UserManager implements IUserService {
 	private IUserRepository userRepository;
 	private IModelMapperService modelMapperService;
 	private IAuthenticationFacade authenticationFacade;
+	private ICartService cartService;
 	
 	
 	@Override
 	public void register(UserRegisterRequest register) {
 		User user = this.modelMapperService.forRequest().map(register, User.class);
 		this.userRepository.save(user);
+		
+		cartService.createCartForUser(user);
 		
 	}
 

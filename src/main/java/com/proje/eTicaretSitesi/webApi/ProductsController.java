@@ -29,12 +29,12 @@ public class ProductsController {
 	
 	private IProductService productService;
 	
-	@GetMapping
+	@GetMapping("/getall")
 	public List<GetAllProductsResponse> getAllProductsResponse() {
 		return productService.getAllProductsResponse();
 	}
 	
-	@PostMapping()
+	@PostMapping("/add")
 	@ResponseStatus(code=HttpStatus.CREATED)
 	public void add(@RequestBody() @Valid() CreateProductRequest createProductRequest) {
 		
@@ -47,13 +47,13 @@ public class ProductsController {
 		return productService.getById(urunId);
 	}
 	
-	@PutMapping
+	@PutMapping("/update")
 	public void update(@RequestBody() @Valid() UpdateProductRequest updateProductRequest) {
 		
 		this.productService.update(updateProductRequest);
 	}
 	
-	@DeleteMapping
+	@DeleteMapping("/delete")
 	public void delete(@PathVariable long id) {
 		
 		this.productService.delete(id);

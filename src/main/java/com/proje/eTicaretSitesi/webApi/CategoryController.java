@@ -29,7 +29,7 @@ public class CategoryController {
 	
 	private ICategoryService categoryService;
 	
-	@GetMapping
+	@GetMapping("/getall")
 	public List<GetAllCategoryResponse> getAllCategoryResponse(){
 		
 		return categoryService.GetAllCategoryResponse();
@@ -41,14 +41,14 @@ public class CategoryController {
 		return categoryService.getById(id);
 	}
 	
-	@PostMapping()
+	@PostMapping("/add")
 	@ResponseStatus(code=HttpStatus.CREATED)
 	public void add(@RequestBody @Valid CreateCategoryRequest createCategoryRequest) {
 		
 		this.categoryService.add(createCategoryRequest);
 	}
 	
-	@PutMapping
+	@PutMapping("/update")
 	public void update(@RequestBody() @Valid()UpdateCategoryRequest createCategoryRequest) {
 		
 		this.categoryService.update(createCategoryRequest);

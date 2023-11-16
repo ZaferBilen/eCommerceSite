@@ -1,8 +1,8 @@
 package com.proje.eTicaretSitesi.entities;
 
-import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -10,7 +10,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -68,8 +69,9 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private UserRole role;
 	
-	@OneToMany(mappedBy = "user")
-	private List<Cart> carts;
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	@JoinColumn(name = "cart_id")
+	private Cart cart;
 	
 
 }
