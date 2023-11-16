@@ -10,6 +10,7 @@ import com.proje.eTicaretSitesi.business.abstracts.IUserService;
 import com.proje.eTicaretSitesi.business.requests.UserLoginRequest;
 import com.proje.eTicaretSitesi.business.requests.UserRegisterRequest;
 import com.proje.eTicaretSitesi.business.responses.GetUserProfileResponse;
+import com.proje.eTicaretSitesi.business.rules.UserBusinessRules;
 import com.proje.eTicaretSitesi.core.utilities.authentication.IAuthenticationFacade;
 import com.proje.eTicaretSitesi.core.utilities.mappers.IModelMapperService;
 import com.proje.eTicaretSitesi.dataAccess.IUserRepository;
@@ -25,10 +26,15 @@ public class UserManager implements IUserService {
 	private IModelMapperService modelMapperService;
 	private IAuthenticationFacade authenticationFacade;
 	private ICartService cartService;
+	private UserBusinessRules userBusinessRules;
 	
 	
 	@Override
 	public void register(UserRegisterRequest register) {
+		
+		this.userBusinessRules.checkIfUserEmailExists(register.getEmail());
+		this.userBusinessRules.checkIfPasswordsMatch(register.getPassword(),register.getPasswordControl());
+		
 		User user = this.modelMapperService.forRequest().map(register, User.class);
 		this.userRepository.save(user);
 		

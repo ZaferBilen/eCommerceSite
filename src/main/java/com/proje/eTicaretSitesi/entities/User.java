@@ -15,6 +15,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -63,7 +64,10 @@ public class User {
 	private String email;
 	
 	@Column(name = "password")
+    @NotBlank(message = "Password cannot be blank")
 	private String password;
+	
+	private String passwordControl;
 	
 	@Column(name = "role")
 	@Enumerated(EnumType.STRING)

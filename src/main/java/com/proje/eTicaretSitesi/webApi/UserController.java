@@ -14,6 +14,7 @@ import com.proje.eTicaretSitesi.business.requests.UserLoginRequest;
 import com.proje.eTicaretSitesi.business.requests.UserRegisterRequest;
 import com.proje.eTicaretSitesi.business.responses.GetUserProfileResponse;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -26,7 +27,7 @@ public class UserController {
 		
 		@PostMapping("/register")
 	    @ResponseStatus(code = HttpStatus.CREATED)
-	    public ResponseEntity<String> registerUser(@RequestBody UserRegisterRequest register){
+	    public ResponseEntity<String> registerUser(@RequestBody @Valid  UserRegisterRequest register){
 			
 			userService.register(register);
 			return ResponseEntity.ok("User registered successfully");

@@ -10,6 +10,7 @@ import com.proje.eTicaretSitesi.business.requests.CreateCategoryRequest;
 import com.proje.eTicaretSitesi.business.requests.UpdateCategoryRequest;
 import com.proje.eTicaretSitesi.business.responses.GetAllCategoryResponse;
 import com.proje.eTicaretSitesi.business.responses.GetCategoryByIdResponse;
+import com.proje.eTicaretSitesi.business.rules.CategoryBusinessRules;
 import com.proje.eTicaretSitesi.core.utilities.mappers.IModelMapperService;
 import com.proje.eTicaretSitesi.dataAccess.ICategoryRepository;
 import com.proje.eTicaretSitesi.entities.Category;
@@ -22,6 +23,7 @@ public class CategoryManager implements ICategoryService{
 
 	private ICategoryRepository categoryRepository;
 	private IModelMapperService modelMapperService;
+	private CategoryBusinessRules categoryBusinessRules;
 	
 	@Override
 	public List<GetAllCategoryResponse> GetAllCategoryResponse() {
@@ -37,7 +39,7 @@ public class CategoryManager implements ICategoryService{
 
 	@Override
 	public GetCategoryByIdResponse getById(long urunId) {
-	
+		
 		Category category = this.categoryRepository.findById(urunId).orElseThrow();
 		
 		GetCategoryByIdResponse response = this.modelMapperService.forResponse().map(category, GetCategoryByIdResponse.class);
@@ -46,6 +48,8 @@ public class CategoryManager implements ICategoryService{
 
 	@Override
 	public void add(CreateCategoryRequest createCategoryRequest) {
+		
+		this.categoryBusinessRules.checkIfCategoryNameExists(createCategoryRequest.getName());
 		
 		Category category=this.modelMapperService.forRequest()
 				.map(createCategoryRequest, Category.class);
